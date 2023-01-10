@@ -1,0 +1,52 @@
+Kubernate Start---- minikube start --hyperv-use-external-switch
+
+--Kubernates Commands-
+kubectl create -f {defination.yml file name} --to run with yml
+To check the Replica Set 
+	kubectl get replicaset new-replica-set
+To check PODS
+	kubectl get pods
+To Sacale Down And Up --->
+	kubectl scale - -replicas=5 -f replicaset-app.yaml   ## Scale up
+	kubectl scale - -replicas=1 -f replicaset-app.yaml
+	kubectl scale rs new-replica-set --replicas=15
+
+Describe Pod.
+	kubectl describe replicaset set new-replica-set
+	
+Describe Particular POD
+	kubectl describe pod PONAME
+
+->kubectl delete rs replicaset-1	
+	replicaset.apps "replicaset-1" deleted
+
+edit RS--
+	kubectl edit rs new-replica-set
+-----To get the Deployment-------------
+kubectl get deployments
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+	
+----RollOut command
+kubect rollout  status deployment/my-deployement name 
+kubect rollout  history deployment/my-deployement name 
+kubect rollout  undo deployment/my-deployement name 
+
+---- Describe Deployements
+kubectl describe deployments
+----------------Inspect the deployment and identify the current strategy------------
+kubectl describe deployments
+
+-----------To update application -----------------
+kubectl set image deployment frontend simple-webapp=kodekloud/webapp-color:v3
+kubectl set image deployment/frontend nginx=kodekloud/webapp-color:v2
+kubectl edit deployments.apps/frontend
+
